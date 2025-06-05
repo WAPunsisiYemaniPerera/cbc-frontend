@@ -4,6 +4,7 @@ import { MdWarehouse } from "react-icons/md";
 import { FaFileInvoice } from "react-icons/fa6";
 
 export default function AdminPage(){
+    //reacthook
     return(
         <div className="w-full h-screen bg-gray-400 flex p-2">
             <div className="h-full w-[300px]">
