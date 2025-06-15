@@ -64,3 +64,6 @@ export default function AdminProductsPage(){
         </div>
     )
 }
+
+//project url = https://avhiweclsvsyvvuayatw.supabase.co
+//anon key = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF2aGl3ZWNsc3ZzeXZ2dWF5YXR3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk4OTU1NDEsImV4cCI6MjA2NTQ3MTU0MX0.t8i-D4N4ClDtnu4UVpAH03yZ464OaDOnvTZAjyOUGwk

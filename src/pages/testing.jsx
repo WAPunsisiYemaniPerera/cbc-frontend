@@ -1,37 +1,37 @@
-import { useState } from "react";
+
+import { useState } from "react"
+import toast from "react-hot-toast";
+import mediaUpload from "../utils/mediaUpload";
 
 export default function Testing(){
-    const [number,setNumber] = useState(0);
-    const [status,setStatus] = useState("Pending")
-  
+    //hooks - to update the page
+    const [file, setFile] = useState(null);
 
-    function increment(){
-        let newValue = number + 1
-        setNumber(newValue);
+    
+    function handleUpload(){
+        mediaUpload(file).then(
+            (url)=>{
+                console.log(url)
+                toast.success("File uploaded successsfully")
+            }
+        ).catch(
+            (error)=>{
+                console.log(error);
+                toast.error("File upload failed")
+            }
+        )
     }
 
-    function decrement(){
-        let newValue = number-1;
-        setNumber(newValue);
-    }
 
     return(
         <div className="w-full h-screen  flex flex-col justify-center items-center">
-            <span className="text-3xl font-bold">{number}</span>
-            <div className="w-full flex justify-center">
-                <button onClick={increment} className="bg-amber-300 text-black p-2 rounded-lg w-[60px] cursor-pointer">+</button>
-                <button onClick={decrement} className="bg-amber-300 text-black p-2 rounded-lg w-[60px] cursor-pointer">-</button>
-            </div>
+            <input type="file" onChange={
+                (e)=>{
+                    setFile(e.target.files[0])
+                }
+            }/>
 
-            <span className="text-3xl font-bold">{status}</span>
-            <div className="w-full flex justify-center">
-                <button onClick={()=>{
-                    setStatus("Passed");
-                }} className="bg-amber-300 text-black p-2 rounded-lg w-[60px] cursor-pointer">Pass</button>
-                <button onClick={()=>{
-                    setStatus("Failed");
-                }} className="bg-amber-300 text-black p-2 rounded-lg w-[60px] cursor-pointer">Fail</button>
-            </div>
+            <button onClick={handleUpload} className="bg-amber-500 text-black p-2 rounded-lg">Upload</button>
         </div>
     )
 }
