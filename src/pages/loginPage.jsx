@@ -1,18 +1,22 @@
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function LoginPage() {
     //hooks
     const [email,setEmail] = useState();
     const [password,setPassword] = useState();
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
     
 
     function handleLogin(){
         console.log("Email: ",email);
         console.log("Password: ",password);
+
+        setLoading(true)
+
 
         axios.post(import.meta.env.VITE_BACKEND_URL+"/api/user/login",{
             email : email,
@@ -30,6 +34,7 @@ export default function LoginPage() {
                 }else {
                     navigate("/")
                 }
+                setLoading(false)
                 
                 
             }
@@ -37,7 +42,9 @@ export default function LoginPage() {
             (error)=>{
                 console.log("Login Failed!!", error.response.data);
                 toast.error(error.response.data.message || "Login failed");
+                setLoading(false)
             }
+            
         )
 
         console.log("Login button pressed");
@@ -62,7 +69,20 @@ export default function LoginPage() {
                             setPassword(e.target.value)
                         }
                     }className="w-[400px] h-[50px] border border-white rounded-xl text-center m-[5px]" type="password" placeholder="password" />
-                    <button onClick={handleLogin} className="w-[400px] h-[50px] bg-green-400 text-black rounded-xl cursor-pointer">Login</button>
+                    <button onClick={handleLogin} 
+                        className="w-[400px] h-[50px] bg-green-400 text-black rounded-xl cursor-pointer">
+                        {
+                            loading?"Loading...":"Login"
+                        }
+                    </button>
+                    <p className="text-white text-center m-[10px]">
+                        Don't have an account yet?
+                        &nbsp;
+                        <span className="text-green-500 cursor-pointer hover:text-green-700">
+                            <Link to="/register">Register Now</Link>
+                        </span>
+                    </p>
+                    
                 </div>
             </div>
         </div>
