@@ -1,13 +1,14 @@
+import { Link } from "react-router-dom";
+
 export default function Header() {
   return (
-    <header className="w-full bg-blue-900 h-[60px] text-white shadow-md flex items-center justify-between px-6">
-      <h1 className="text-xl font-bold tracking-wide">My Store</h1>
-
-      <nav className="space-x-4 hidden sm:flex">
-        <a href="#" className="hover:text-blue-300 transition duration-200">Home</a>
-        <a href="#" className="hover:text-blue-300 transition duration-200">Products</a>
-        <a href="#" className="hover:text-blue-300 transition duration-200">Contact</a>
-      </nav>
+    <header className="w-full h-[70px] flex justify-center items-center bg-gray-100">
+      <div className=" w-[500px] h-full flex items-center justify-evenly text-pink-700 text-xl">
+        <Link to="/">Home</Link>
+        <Link to="/products">Products</Link>
+        <Link to="/contact">Contact Us</Link>
+        <Link to="/reviews">Reviews</Link>
+      </div>
     </header>
   );
 }
