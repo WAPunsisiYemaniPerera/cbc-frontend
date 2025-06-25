@@ -1,10 +1,12 @@
-import getCart, { addToCart, removeFromCart } from "../../utils/cart"
+import getCart, { addToCart, getTotal, getTotalForLabeledPrice, removeFromCart } from "../../utils/cart"
 import { TbTrash } from "react-icons/tb"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function CartPage() {
     const [cartLoaded, setCartLoaded] = useState(false)
     const [cart, setCart] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (!cartLoaded) {
@@ -36,7 +38,7 @@ export default function CartPage() {
                             <div className="h-full max-w-[300px] w-[300px] overflow-hidden">
                                 <h1 className="text-xl text-black font-semibold">{item.name}</h1>
                                 <h2 className="text-lg text-gray-600 font-medium">{item.altNames.join(" | ")}</h2>
-                                <h2 className="text-lg text-gray-600 font-medium">LKR: {item.price.toFixed(2)}</h2>
+                                <h2 className="text-lg text-gray-600 font-medium w-full text-end pr-2">LKR: {item.price.toFixed(2)}</h2>
                             </div>
 
                             <div className="h-full w-[100px] flex justify-center items-center">
@@ -54,13 +56,43 @@ export default function CartPage() {
                             </div>
 
                             <div className="h-full w-[100px] flex justify-center items-center">
-                                <h1 className="text-xl text-black font-medium">
+                                <h1 className="text-xl text-black font-medium w-full text-end pr-2">
                                     {(item.price * item.quantity).toFixed(2)}
                                 </h1>
                             </div>
                         </div>
                     ))
                 }
+
+                <div className="w-full flex justify-end">
+                    <h1 className="text-xl w-[100px] text-end pr-2 font-semibold">Total</h1>
+                    <h1 className="text-xl w-[100px] text-end pr-2 font-semibold">{getTotalForLabeledPrice().toFixed(2)}</h1>
+
+                </div>
+
+                <div className="w-[full] flex justify-end">
+                    <h1 className="text-xl w-[100px] text-end pr-2 font-semibold">Discount</h1>
+                    <h1 className="text-xl border-b-[2px] w-[100px] text-end pr-2 font-semibold">{(getTotalForLabeledPrice()-getTotal()).toFixed(2)}</h1>
+
+                </div>
+
+                <div className="w-full flex justify-end">
+                    <h1 className="text-xl w-[100px] text-end pr-2 font-semibold">Net Total</h1>
+                    <h1 className="text-xl w-[100px] text-end pr-2 font-semibold border-b-[4px] border-double">{getTotal().toFixed(2)}</h1>
+
+                </div>
+
+                <div className="w-full  flex justify-end mt-4">
+                    <button className="w-[170px] text-xl  text-center shadow pr-2 bg-pink-400 text-white h-[40px] rounded-lg cursor-pointer" onClick={()=>{
+                        navigate("/checkout",
+                            {
+                                state : {
+                                    items : cart
+                                }
+                            }
+                        )
+                    }}>Checkout</button>
+                </div>
             </div>
         </div>
     )
