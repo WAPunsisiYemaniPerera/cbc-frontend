@@ -58,6 +58,7 @@ export default function ProductOverview() {
 								{product.altNames.join(" | ")}
 							</span>
 						</h1>
+						
 						<h2 className="text-2xl mr-[20px]"></h2>
 						<div className="w-full flex justify-center mb-[40px]">
 							{product.labeledPrice > product.price ? (

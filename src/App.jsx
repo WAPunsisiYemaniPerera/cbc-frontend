@@ -9,6 +9,7 @@ import { Toaster } from 'react-hot-toast';
 import RegisterPage from './pages/client/register';
 import HomePage from './pages/homePage';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import ResponsiveTesting from './pages/testing2';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/testing" element={<Testing/>}/>
             <Route path="/register" element={<RegisterPage/>}/>
+            <Route path="/r" element={<ResponsiveTesting/>}/>
             <Route path="/*" element={<HomePage/>}/>
             
 
